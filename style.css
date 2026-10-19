@@ -122,3 +122,46 @@ footer {
         font-size: 26px;
     }
 }
+/* Questionnaire form styling */
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+form label {
+    display: block;
+    font-weight: bold;
+    color: #17324d;
+    margin-top: 10px;
+}
+
+form input,
+form textarea {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ccd6df;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 16px;
+    background-color: #ffffff;
+}
+
+form input:focus,
+form textarea:focus {
+    outline: 2px solid #159e91;
+    outline-offset: 2px;
+}
+
+form button {
+    align-self: flex-start;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #117d73;
+}
