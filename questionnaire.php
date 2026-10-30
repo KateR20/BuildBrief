@@ -24,7 +24,20 @@ $allowedPages = [
     "Testimonials",
     "Contact",
     "FAQ"
+
+    ];
+
+$allowedFeatures = [
+    "Contact form",
+    "Online booking",
+    "Photo gallery",
+    "Customer testimonials",
+    "Social media links",
+    "Online payments",
+    "Newsletter signup"
 ];
+
+
 
 $goals = is_array($submittedGoals)
     ? array_values(array_intersect($allowedGoals, $submittedGoals))
@@ -34,6 +47,13 @@ $submittedPages = $_POST["pages"] ?? [];
 $pages = is_array($submittedPages)
     ? array_values(array_intersect($allowedPages, $submittedPages))
     : [];
+
+$submittedFeatures = $_POST["features"] ?? [];
+
+$features = is_array($submittedFeatures)
+    ? array_values(array_intersect($allowedFeatures, $submittedFeatures))
+    : [];
+
     if (
         $businessName !== "" &&
         $industry !== "" &&
@@ -51,6 +71,11 @@ $pages = is_array($submittedPages)
     if (!empty($pages)) {
         $message .= " Selected pages: " . implode(", ", $pages);
     }
+
+if (!empty($features)) {
+    $message .= " Selected features: " . implode(", ", $features);
+}
+
 
 } else {
     $message = "Please complete all fields.";
@@ -181,6 +206,48 @@ $pages = is_array($submittedPages)
         FAQ
     </label>
 </fieldset>
+
+<fieldset class="website-goals">
+    <legend>What features would you like on your website?</legend>
+
+    <label>
+        <input type="checkbox" name="features[]" value="Contact form">
+        Contact form
+    </label>
+
+    <label>
+        <input type="checkbox" name="features[]" value="Online booking">
+        Online booking or appointments
+    </label>
+
+    <label>
+        <input type="checkbox" name="features[]" value="Photo gallery">
+        Photo gallery
+    </label>
+
+    <label>
+        <input type="checkbox" name="features[]" value="Customer testimonials">
+        Customer testimonials
+    </label>
+
+    <label>
+        <input type="checkbox" name="features[]" value="Social media links">
+        Social media links
+    </label>
+
+    <label>
+        <input type="checkbox" name="features[]" value="Online payments">
+        Online payments
+    </label>
+
+    <label>
+        <input type="checkbox" name="features[]" value="Newsletter signup">
+        Newsletter signup
+    </label>
+</fieldset>
+
+
+
 <button type="submit">Save Information</button>
 
         </form>
