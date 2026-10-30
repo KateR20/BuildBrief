@@ -35,7 +35,26 @@ $allowedFeatures = [
     "Social media links",
     "Online payments",
     "Newsletter signup"
+
 ];
+
+$allowedStyles = [
+    "Modern",
+    "Minimalist",
+    "Elegant",
+    "Bold",
+    "Playful",
+    "Professional"
+];
+
+$allowedFeels = [
+    "Clean",
+    "Creative",
+    "Welcoming",
+    "Corporate"
+];
+
+
 
 
 
@@ -53,6 +72,21 @@ $submittedFeatures = $_POST["features"] ?? [];
 $features = is_array($submittedFeatures)
     ? array_values(array_intersect($allowedFeatures, $submittedFeatures))
     : [];
+
+$submittedStyle = $_POST["website_style"] ?? "";
+$websiteStyle = is_string($submittedStyle) &&
+    in_array($submittedStyle, $allowedStyles, true)
+    ? $submittedStyle : "";
+
+$submittedFeel = $_POST["website_feel"] ?? "";
+$websiteFeel = is_string($submittedFeel) &&
+    in_array($submittedFeel, $allowedFeels, true)
+    ? $submittedFeel : "";
+
+$submittedColours = $_POST["preferred_colours"] ?? "";
+$preferredColours = is_string($submittedColours)
+    ? trim($submittedColours) : "";
+
 
     if (
         $businessName !== "" &&
@@ -75,6 +109,19 @@ $features = is_array($submittedFeatures)
 if (!empty($features)) {
     $message .= " Selected features: " . implode(", ", $features);
 }
+
+if ($websiteStyle !== "") {
+    $message .= " Website style: " . $websiteStyle;
+}
+
+if ($preferredColours !== "") {
+    $message .= " Preferred colours: " . $preferredColours;
+}
+
+if ($websiteFeel !== "") {
+    $message .= " Overall feel: " . $websiteFeel;
+}
+
 
 
 } else {
@@ -246,6 +293,41 @@ if (!empty($features)) {
     </label>
 </fieldset>
 
+
+<fieldset class="website-goals">
+    <legend>Design & Style Preferences</legend>
+
+    <label for="website_style">
+        What style would you like for your website?
+    </label>
+    <select id="website_style" name="website_style">
+        <option value="">Select a style</option>
+        <option value="Modern">Modern</option>
+        <option value="Minimalist">Minimalist</option>
+        <option value="Elegant">Elegant</option>
+        <option value="Bold">Bold</option>
+        <option value="Playful">Playful</option>
+        <option value="Professional">Professional</option>
+    </select>
+
+    <label for="preferred_colours">
+        Do you have any preferred colours?
+    </label>
+    <input type="text" id="preferred_colours"
+           name="preferred_colours"
+           placeholder="e.g. Navy blue, teal, white">
+
+    <label for="website_feel">
+        How would you like your website to feel?
+    </label>
+    <select id="website_feel" name="website_feel">
+        <option value="">Select an overall feel</option>
+        <option value="Clean">Clean</option>
+        <option value="Creative">Creative</option>
+        <option value="Welcoming">Welcoming</option>
+        <option value="Corporate">Corporate</option>
+    </select>
+</fieldset>
 
 
 <button type="submit">Save Information</button>

@@ -194,3 +194,20 @@ form button:hover {
     accent-color: #159e91;
     flex-shrink: 0;
 }
+
+/* Design Preferences Dropdowns */
+
+.website-goals select {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccd6df;
+    border-radius: 8px;
+    background-color: white;
+    color: #17324d;
+    font-size: 16px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
