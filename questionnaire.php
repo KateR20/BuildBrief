@@ -7,6 +7,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $industry = trim($_POST["industry"] ?? "");
     $description = trim($_POST["description"] ?? "");
     $websitePurpose = trim($_POST["website_purpose"] ?? "");
+    $allowedGoals = [
+    "Attract new customers",
+    "Showcase products or services",
+    "Sell products online",
+    "Accept bookings",
+    "Share information"
+];
+
+$submittedGoals = $_POST["goals"] ?? [];
+
+$goals = is_array($submittedGoals)
+    ? array_values(array_intersect($allowedGoals, $submittedGoals))
+    : [];
 
     if (
         $businessName !== "" &&
@@ -15,6 +28,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $websitePurpose !== ""
     ) {
         $message = "Your information was received successfully!";
+
+if (!empty($goals)) {
+    $message .= " Selected goals: " . implode(", ", $goals);
+}
     } else {
         $message = "Please complete all fields.";
     }
@@ -75,6 +92,35 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                       name="website_purpose" rows="4"
                       required></textarea>
 
+
+                      <fieldset class="website-goals">
+    <legend>What would you like your website to achieve?</legend>
+
+    <label>
+        <input type="checkbox" name="goals[]" value="Attract new customers">
+        Attract new customers
+    </label>
+
+    <label>
+        <input type="checkbox" name="goals[]" value="Showcase products or services">
+        Showcase products or services
+    </label>
+
+    <label>
+        <input type="checkbox" name="goals[]" value="Sell products online">
+        Sell products online
+    </label>
+
+    <label>
+        <input type="checkbox" name="goals[]" value="Accept bookings">
+        Accept bookings or appointments
+    </label>
+
+    <label>
+        <input type="checkbox" name="goals[]" value="Share information">
+        Share information
+    </label>
+</fieldset>
             <button type="submit">Save Information</button>
 
         </form>
