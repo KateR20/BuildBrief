@@ -16,11 +16,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 ];
 
 $submittedGoals = $_POST["goals"] ?? [];
+$allowedPages = [
+    "Home",
+    "About",
+    "Services",
+    "Gallery",
+    "Testimonials",
+    "Contact",
+    "FAQ"
+];
 
 $goals = is_array($submittedGoals)
     ? array_values(array_intersect($allowedGoals, $submittedGoals))
     : [];
+$submittedPages = $_POST["pages"] ?? [];
 
+$pages = is_array($submittedPages)
+    ? array_values(array_intersect($allowedPages, $submittedPages))
+    : [];
     if (
         $businessName !== "" &&
         $industry !== "" &&
@@ -29,13 +42,21 @@ $goals = is_array($submittedGoals)
     ) {
         $message = "Your information was received successfully!";
 
-if (!empty($goals)) {
-    $message .= " Selected goals: " . implode(", ", $goals);
-}
-    } else {
-        $message = "Please complete all fields.";
+
+
+    if (!empty($goals)) {
+        $message .= " Selected goals: " . implode(", ", $goals);
     }
+
+    if (!empty($pages)) {
+        $message .= " Selected pages: " . implode(", ", $pages);
+    }
+
+} else {
+    $message = "Please complete all fields.";
 }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -121,7 +142,46 @@ if (!empty($goals)) {
         Share information
     </label>
 </fieldset>
-            <button type="submit">Save Information</button>
+            
+<fieldset class="website-goals">
+    <legend>Which pages would you like on your website?</legend>
+
+    <label>
+        <input type="checkbox" name="pages[]" value="Home">
+        Home
+    </label>
+
+    <label>
+        <input type="checkbox" name="pages[]" value="About">
+        About
+    </label>
+
+    <label>
+        <input type="checkbox" name="pages[]" value="Services">
+        Services
+    </label>
+
+    <label>
+        <input type="checkbox" name="pages[]" value="Gallery">
+        Gallery
+    </label>
+
+    <label>
+        <input type="checkbox" name="pages[]" value="Testimonials">
+        Testimonials
+    </label>
+
+    <label>
+        <input type="checkbox" name="pages[]" value="Contact">
+        Contact
+    </label>
+
+    <label>
+        <input type="checkbox" name="pages[]" value="FAQ">
+        FAQ
+    </label>
+</fieldset>
+<button type="submit">Save Information</button>
 
         </form>
     </section>
